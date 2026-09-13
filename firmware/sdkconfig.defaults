@@ -1,0 +1,27 @@
+# ---- Target ----
+CONFIG_IDF_TARGET="esp32c6"
+
+# ---- Zigbee ----
+# Build as an end device (sleepy=false, we are mains powered driving LEDs).
+CONFIG_ZB_ENABLED=y
+CONFIG_ZB_ZED=y
+CONFIG_ZB_RADIO_NATIVE=y
+
+# 802.15.4 native radio on the C6
+CONFIG_IEEE802154_ENABLED=y
+
+# ---- Partition table with enough app space + NVS ----
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# ---- Main task stack (Zigbee stack likes headroom) ----
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=6144
+
+# ---- Log level (set to INFO; drop to WARN for production) ----
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y
+
+# ---- FreeRTOS tick at 1000 Hz for smooth 50 FPS rendering ----
+CONFIG_FREERTOS_HZ=1000
+
+# ---- Newlib: enable nano formatting to save flash ----
+CONFIG_NEWLIB_NANO_FORMAT=y
